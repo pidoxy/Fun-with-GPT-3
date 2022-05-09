@@ -4,7 +4,7 @@ const AppContext = createContext();
 AppContext.displayName = "AppContext";
 
 export const AppContextProvider = ({ children }) => {
-    
+
     useEffect(() => {
         localStorage.setItem("prompts", JSON.stringify({}));
       }, []);
@@ -19,7 +19,7 @@ export const AppContextProvider = ({ children }) => {
       
       useEffect(() => {
         getPrompts();
-      }, [prompt]);
+      }, []);
 
   return (
     <AppContext.Provider value={{ getPrompts, setPrompts }}>{children}</AppContext.Provider>

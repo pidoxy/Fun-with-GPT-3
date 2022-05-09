@@ -1,16 +1,41 @@
-import { useState, useContext, useEffect } from "react";
-import { AppContextProvider } from "../context/AppContext";
+import { useState,  } from "react";
+// import { AppContextProvider } from "../context/AppContext";
 const Form = () => {
-    const {getPrompts, setPrompts} = useContext(AppContextProvider);
+  // const {getPrompts, setPrompts} = useContext(AppContextProvider);
 
-    const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState("");
 
-    useEffect(() => {
-        setPrompts(getPrompts());
-    }, [prompt])
-    
+  const handlePrompt = (e) => {
+    e.preventDefault();
+
+    // Capitalize first letter of each word in the prompt
+    const capitalizeTheFirstLetterOfEachWord = (words) => {
+      let separateWord = words.toLowerCase().split(" ");
+      for (let i = 0; i < separateWord.length; i++) {
+        separateWord[i] =
+          separateWord[i].charAt(0).toUpperCase() +
+          separateWord[i].substring(1);
+      }
+      return separateWord.join(" ");
+    };
+    let newPrompt = capitalizeTheFirstLetterOfEachWord(prompt);
+
+    // Check if prompt ends with question mark
+    if (newPrompt.endsWith("?")) {
+      // If it does, add a period to the end
+      return newPrompt;
+    } else {
+      // If it doesn't, add a question mark to the end
+      newPrompt = newPrompt + "?";
+    }
+    console.log(newPrompt);
+  };
+
   return (
-    <form className="flex justify-center px-5">
+    <form
+      onSubmit={(e) => handlePrompt(e)}
+      className="flex justify-center px-5"
+    >
       <div className="my-3 w-full md:w-1/2 space-y-5">
         <label
           htmlFor="prompt"
@@ -19,29 +44,19 @@ const Form = () => {
           Enter Prompt
         </label>
         <textarea
-          className="
-        form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none
-      "
+          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none"
           id="prompt"
           name="prompt"
           rows="7"
           placeholder="Your message"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
         ></textarea>
-        <input type={"submit"} onClick={(e) => setPrompt(e.target.value)} value={"submit"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" />
+        <input
+          type={"submit"}
+          value={"submit"}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        />
       </div>
     </form>
   );
