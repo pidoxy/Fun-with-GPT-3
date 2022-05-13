@@ -1,5 +1,16 @@
+import { useEffect } from "react";
 
 const Responses = () => {
+
+    const getPrompts = () => {
+        return localStorage.getItem("prompts");
+    };
+    
+  useEffect (() => {
+    let prompts = getPrompts() || [];
+    console.log(prompts)
+  });
+
   const response = [
     {
       id: 1,

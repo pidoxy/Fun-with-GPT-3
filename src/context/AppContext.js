@@ -6,22 +6,18 @@ AppContext.displayName = "AppContext";
 export const AppContextProvider = ({ children }) => {
 
     useEffect(() => {
-        localStorage.setItem("prompts", JSON.stringify({}));
+        localStorage.setItem("prompts", JSON.stringify([]));
       }, []);
       
       const getPrompts = () => {
         return localStorage.getItem("prompts");
       };
       
-      const setPrompts = (prompts) => {
+      const savePrompts = (prompts) => {
           return localStorage.setItem("prompts", JSON.stringify(prompts));
         };
-      
-      useEffect(() => {
-        getPrompts();
-      }, []);
 
   return (
-    <AppContext.Provider value={{ getPrompts, setPrompts }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ getPrompts, savePrompts }}>{children}</AppContext.Provider>
   );
 };

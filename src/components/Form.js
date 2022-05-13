@@ -1,9 +1,8 @@
-import { useState,  } from "react";
-// import { AppContextProvider } from "../context/AppContext";
-const Form = () => {
-  // const {getPrompts, setPrompts} = useContext(AppContextProvider);
+import { useEffect, useState } from "react";
 
+const Form = () => {
   const [prompt, setPrompt] = useState("");
+  const [prompts, setPrompts] = useState([]);
 
   const handlePrompt = (e) => {
     e.preventDefault();
@@ -27,8 +26,14 @@ const Form = () => {
     } else {
       // If it doesn't, add a question mark to the end
       newPrompt = newPrompt + "?";
+      setPrompts([...prompts, { newPrompt }]);
     }
+    setPrompts([...prompts, prompt], () => {
+      console.log(prompts);
+    });
     console.log(newPrompt);
+    console.log(prompts);
+    localStorage.setItem("prompts", JSON.stringify(prompts));
   };
 
   return (
@@ -46,10 +51,12 @@ const Form = () => {
         <textarea
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none"
           id="prompt"
-          name="prompt"
+          name="Prompt"
           rows="7"
           placeholder="Your message"
           value={prompt}
+          aria-required="true"
+          aria-label="prompt"
           onChange={(e) => setPrompt(e.target.value)}
         ></textarea>
         <input
