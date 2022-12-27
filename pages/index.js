@@ -1,21 +1,21 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput,setAnimalInput] = useState("");
+  const [promptInput, setPromptInput] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
     event.preventDefault();
     try {
-      const response = await fetch("/api/generate", {
+      const response = await fetch("https://api.openai.com/v1/images/generations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer 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"
         },
-        body: JSON.stringify({ prompt: animalInput }),
+        body: JSON.stringify({ prompt: promptInput }),
       });
 
       const data = await response.json();
@@ -23,9 +23,10 @@ export default function Home() {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
 
-      setResult(data.result);
-      setAnimalInput("");
-    } catch(error) {
+      setResult(data.data[0].url);
+      console.log(data.data[0].url)
+      setPromptInput("");
+    } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
@@ -41,19 +42,22 @@ export default function Home() {
 
       <main className={styles.main}>
         <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <h3>Generate Image With AI(GPT)</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="prompt"
+            placeholder="Enter an prompt"
+            value={promptInput}
+            onChange={(e) => setPromptInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Generate image" />
         </form>
-        <div className={styles.result}>{result}</div>
-        <Image src={result}>{result}</Image>
+        {/* <div className={styles.result}>{result}</div> */}
+        <div className={styles.imgContainer} >
+
+          <img src={result}></img>
+        </div>
       </main>
     </div>
   );

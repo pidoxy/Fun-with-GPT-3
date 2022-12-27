@@ -19,6 +19,8 @@
   line-height: 24px;
   color: #353740;
   font-family: "ColfaxAI", Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
 }
 .main {
   display: flex;
@@ -65,3 +67,15 @@
   font-weight: bold;
   margin-top: 40px;
 }
+
+.imgContainer{
+ margin: 1 rem;
+ padding:1rem;
+ }
+
+ .imgContainer img{
+ width:50%;
+ height: 10%;
+ margin: auto 0;
+ padding: 0 25%;
+ }
