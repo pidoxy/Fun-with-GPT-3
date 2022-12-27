@@ -1,17 +1,41 @@
-# Fun With GPT-3
+# OpenAI API Quickstart - Node.js example app
 
-## Front End Shopify Developer Intern Challenge
+This is an example pet name generator app used in the OpenAI API [quickstart tutorial](https://beta.openai.com/docs/quickstart). It uses the [Next.js](https://nextjs.org/) framework with [React](https://reactjs.org/). Check out the tutorial or follow the instructions below to get set up.
 
-### Fun with GPT-3
+## Setup
 
-GPT-3 is a powerful AI model created by OpenAI. It can process plain text prompts and produce outputs that are hard to distinguish from human writing. Check out some examples of what it can do! GPT-3 can be accessed through a public API that includes a generous amount of free credits. 
+1. If you don’t have Node.js installed, [install it from here](https://nodejs.org/en/)
 
-### The Challenge
-You will write an app that sends plain text prompts to the OpenAI API and displays the results in a list.
+2. Clone this repository
 
-![pidoxy-fun-with-gpt3 netlify app_ (1)](https://user-images.githubusercontent.com/56538561/168400537-4796412f-ee3f-4bc0-ad39-c449482a03ec.png)
+3. Navigate into the project directory
 
-![pidoxy-fun-with-gpt3 netlify app_](https://user-images.githubusercontent.com/56538561/168400539-3d12ec54-1187-43e4-98a5-dbfab19acca0.png)
+   ```bash
+   $ cd openai-quickstart-node
+   ```
 
-* This project was made with React
+4. Install the requirements
 
+   ```bash
+   $ npm install
+   ```
+
+5. Make a copy of the example environment variables file
+
+   On Linux systems: 
+   ```bash
+   $ cp .env.example .env
+   ```
+   On Windows:
+   ```powershell
+   $ copy .env.example .env
+   ```
+6. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
+
+7. Run the app
+
+   ```bash
+   $ npm run dev
+   ```
+
+You should now be able to access the app at [http://localhost:3000](http://localhost:3000)! For the full context behind this example app, check out the [tutorial](https://beta.openai.com/docs/quickstart).
